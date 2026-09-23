@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "author": "Menna",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr1", "top": -120, "left": 250, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -100,
+      "left": 320,
+      "attrs": { "value": "10000" }
+    },
+    { "type": "wokwi-mq2-gas-sensor", "id": "gas1", "top": 0, "left": 300, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "nightLed",
+      "top": 100,
+      "left": 250,
+      "attrs": { "color": "yellow" }
+    },
+    { "type": "wokwi-resistor", "id": "r2", "top": 100, "left": 320, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "redLed", "top": 180, "left": 250, "attrs": { "color": "red" } },
+    { "type": "wokwi-resistor", "id": "r3", "top": 180, "left": 320, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 261.6, "left": 251.4, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "ldr1:1", "esp:3V3", "red", [] ],
+    [ "ldr1:2", "esp:GPIO34", "green", [] ],
+    [ "ldr1:2", "r1:1", "green", [] ],
+    [ "r1:2", "esp:GND.1", "black", [] ],
+    [ "gas1:VCC", "esp:5V", "red", [] ],
+    [ "gas1:GND", "esp:GND.2", "black", [] ],
+    [ "gas1:AOUT", "esp:GPIO35", "green", [] ],
+    [ "nightLed:A", "r2:1", "green", [] ],
+    [ "r2:2", "esp:GPIO26", "green", [] ],
+    [ "nightLed:C", "esp:GND.3", "black", [] ],
+    [ "redLed:A", "r3:1", "green", [] ],
+    [ "r3:2", "esp:GPIO25", "green", [] ],
+    [ "redLed:C", "esp:GND.4", "black", [] ],
+    [ "bz1:1", "esp:GPIO27", "green", [] ],
+    [ "bz1:2", "esp:GND.5", "black", [] ]
+  ],
+  "dependencies": {}
+}
